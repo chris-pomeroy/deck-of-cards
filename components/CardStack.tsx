@@ -1,4 +1,5 @@
 import * as CardImages from '../assets/cards';
+import CardBack from '../assets/cards/back.svg'
 import BackIcon from '../assets/icons/back.svg';
 import RewindIcon from '../assets/icons/rewind.svg';
 import {SafeAreaView, TouchableOpacity, View} from "react-native";
@@ -33,7 +34,7 @@ export default function CardStack() {
         }}>
             {cardNames.slice(currentCard, currentCard + CARDS_TO_RENDER).map((cardName, index) => (
                 <Card
-                    Card={cardMap[cardName]}
+                    Svg={cardMap[cardName]}
                     onSwipe={() => setCurrentCard(prev => prev + 1)}
                     zIndex={CARDS_TO_RENDER - index}
                     key={cardName}
@@ -59,9 +60,6 @@ export default function CardStack() {
                     />
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={{
-                        zIndex: CARDS_TO_RENDER + 1,
-                    }}
                     onPress={() => setCurrentCard(prev => prev - 1)}>
                     <BackIcon
                         width={100}

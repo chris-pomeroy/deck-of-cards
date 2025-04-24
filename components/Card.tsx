@@ -3,12 +3,12 @@ import React, {FC, useMemo, useState} from "react";
 import {SvgProps} from "react-native-svg";
 
 type Props = {
-    Card: FC<SvgProps>;
+    Svg: FC<SvgProps>;
     onSwipe: () => void;
     zIndex: number;
 }
 
-export function Card({Card, onSwipe, zIndex}: Props) {
+export function Card({Svg, onSwipe, zIndex}: Props) {
 
     const DX_THRESHOLD = 100;
 
@@ -30,16 +30,17 @@ export function Card({Card, onSwipe, zIndex}: Props) {
 
     return (
         <View style={{
-            width: "100%",
-            height: "100%",
+            width: "80%",
+            aspectRatio: 0.688544052,
             position: "absolute",
             alignItems: "center",
             justifyContent: "center",
             zIndex: zIndex
         }}>
-            <Card {...panResponder.panHandlers}
-                  width={"90%"}
-                  height={"90%"}
+            <Svg {...panResponder.panHandlers}
+                  width={"100%"}
+                  height={"100%"}
+                 preserveAspectRatio="none"
                   style={{
                       left: dx,
                       transform: [{rotate: `${dx * 0.03}deg`}],
