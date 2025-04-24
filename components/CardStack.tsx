@@ -6,6 +6,7 @@ import {SafeAreaView, TouchableOpacity, View} from "react-native";
 import {FC, useState} from "react";
 import {Card} from "@/components/Card";
 import {SvgProps} from "react-native-svg";
+import {Colors} from "@/constants/Colors";
 
 const CARDS_TO_RENDER = 5
 
@@ -30,7 +31,8 @@ export default function CardStack() {
             width: "100%",
             height: "100%",
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "center",
+            backgroundColor: Colors.dark.background
         }}>
             {cardNames.slice(currentCard, currentCard + CARDS_TO_RENDER).map((cardName, index) => (
                 <Card
