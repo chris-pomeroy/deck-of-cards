@@ -23,6 +23,7 @@ export default function CardStack() {
 
     const [cardNames] = useState<string[]>(() => shuffleArray(Object.keys(CardImages)))
     const [currentCard, setCurrentCard] = useState(0)
+    const [showCardBack, setShowCardBack] = useState(true)
 
     const cardMap = CardImages as Record<string, FC<SvgProps>>
 
@@ -34,6 +35,14 @@ export default function CardStack() {
             justifyContent: "center",
             backgroundColor: Colors.dark.background
         }}>
+            {showCardBack && (
+                <Card
+                    Svg={CardBack}
+                    onSwipe={() => setShowCardBack(false)}
+                    zIndex={CARDS_TO_RENDER + 1}
+                    key={"CardBack"}
+                />
+            )}
             {cardNames.slice(currentCard, currentCard + CARDS_TO_RENDER).map((cardName, index) => (
                 <Card
                     Svg={cardMap[cardName]}
@@ -46,13 +55,16 @@ export default function CardStack() {
                 position: "absolute",
                 bottom: 50,
                 flexDirection: "row",
-                display: currentCard > 0 ? "flex" : "none"
+                display: showCardBack ? "none" : "flex"
             }}>
                 <TouchableOpacity
                     style={{
                         zIndex: CARDS_TO_RENDER + 1,
                     }}
-                    onPress={() => setCurrentCard(0)}>
+                    onPress={() => {
+                        setShowCardBack(true)
+                        setCurrentCard(0)}
+                    }>
                     <RewindIcon
                         width={100}
                         height={100}
